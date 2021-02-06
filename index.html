@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Civility - Datathon 2021</title>
+		<title>Cessation - Datathon 2021</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -11,10 +11,10 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
-					<h1><strong>Civility</strong>: finding unconventional<br />
-					socioeconomic indicators for car <br />
-					crashes and smoking in Houston.</h1>
+					<a href="#" class="image avatar"><img src="images/avatar.png" alt="" /></a>
+					<h1><strong>Cessation</strong>: A progressive <br />
+					approach for addressing tobacco<br />
+					addiction in Houston, Texas.</h1>
 				</div>
 			</header>
 
@@ -24,116 +24,123 @@
 				<!-- One -->
 					<section id="two">
 						<header class="major">
-							<h2>Introduction</h2>
+							<h2>Smoking Still Kills, Tobacco/Smoking Companies Still Rule</h2>
 						</header>
 						<p>
-							Houston is one of the most dangerous cities in the nation for one to drive. In 2019, it led the United States in car crashes and injuries/deaths related to car accidents with 38,538 and representing 13% of all accidents in the state of Texas. In these crashes, over one-third involved injury. Some of the probable causes for car crashes include inebriation, user error driven by insufficient training, and poor infrastructure. While in the past year, the city of Houston has proposed a plan to reduce these crashes and the related automobile fatalities, much of the plan is focused around protecting pedestrians rather than reducing the total number of car accidents. While some have proposed solutions to the probable causes, few have tried to address a root cause of these accidents which could possibly connect infrastructure, training, and inebriation.
-						</p>
-						<p>
-							Smoking is another deadly problem Texas faces. Reports show that 19% of Texans smoke on a daily basis, and that these high rates of use are common among Southern states. While many programs have been put in place to reduce the use of tobacco nationwide, tobacco use is still responsible for over 480,000 deaths per year. Reports indicate that tobacco use is highest among people below poverty line, something that anti-smoking efforts have had a hard time addressing with its approach.
+							Tobacco consumption is endemic in impoverished and forgotten America. Have you ever realized how many smoke shops you see in more run-down strip malls and within remote gas stations, or did you know even that tobacco advertising is rampant in places without secure housing? More generally, can we use data science to identify and even exploit unconventional indicators of socioeconomic status to bring changes to our communities?  Our project Cessation aims to bring more factors into the conversation of poverty in our home city Houston, namely the prevalence of tobacco by area and its potential connection with poverty. 
 
 						</p>
 						<p>
-							In this project, we aim to find a connecting factor between these two causes of death in Texas. Our hypothesis we intend to test is regional socioeconomic status, which will be analyzed using location-based data for median income. We will then utilize machine learning to calibrate a regression model relating car crash and smoke-shop locations to outcomes in median income. 
+							An initial literature review exposed both damning and promising facts about smoking, mortality, and poverty, shown below. The main conclusions to draw are that any relation between smoking and poverty seems to be independent of the percentage of minority folk in a given area, which completely rids the analysis of a racially-charged and biased social indicator. Also, despite major worldwide productivity losses due to tobacco, anti-tobacco campaigns are relatively simple to implement with tangible effects. Based on this review, we again attempt to draw a connection between smoke shops and poverty, even without using common instrumental variables like racial makeup, and propose actionable policy decisions to better our community.
 						</p>
 						<div class="row">
-						<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/stills/smoke-class.jpg" alt="" /></a>
-								<h3>Smokers and Socioeconomic class</h3>
-								<p>Blue = below poverty line, red = above poverty line, grey = more than double poverty line. Source: CDC.gov</p>
+
+							<article class="col-12-xsmall work-item">
+							<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1iR_tnWPCTu1wABcDfbvZ3qGIe3JKaOL0" width="480" height="360"></iframe>
+								<h3>Interactive visualization of active smoke shops in Houston 2002 - 2016</h3>
+								<p>Data Sourced From: Texas Open Data Portal</p>
 							</article>
 						</div>
 						
-						<ul class="actions">
-							<li><a href="#" class="button">Learn More</a></li>
-						</ul>
 					</section>
 
 				<!-- Two -->
 					<section id="two">
 
-						<h2>Methods</h2>
-						<div class="row">
-							<article class="work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-								<h3>Interactive Visualization of Smoke Shops in Houston 2002 - 2016</h3>
-								<p>Plotted points indicate an individual shop</p>
-							</article>
-							<article class="work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-								<h3>Interactive Visualization of Car Crashes in Houston 2010 - 2016</h3>
-								<p>Plotted points indicate an individual crash</p>
-							</article>
-							<!--
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-						-->
-						</div>
+						<h2>Using Machine Learning to Find What Correlates With Smoke Retailers</h2>
 						<p>
-							DESCRIBE THE PLOTS
+							Houston smoking vendor location data was obtained from the Texas Open Data Portal. Median income and population data corresponding to Harris County zip codes were also obtained from ZipAtlas. We initially worked to parse, clean, and wrangle our data using the Google Maps API alongside statistical softwares R, Excel, and QGIS. Each data set was then plotted onto a lat-long map and further processed to show heatmaps in income, population density, and smoke shop density. 
+					</p>
+						<p>
+								To find probable causes of median income trends, a least absolute shrinkage and selection operator (or lasso) algorithm was run using location geodata, smoke vendor density, and other variables to determine strong correlations. Lasso regression is a type of linear regression that shrinks data values towards a central point. This shrinking does not have to occur equally across system variables, which results in 'weights' that can give information about which variables correlate to the result the best. We chose the LASSO method, as it is strong in sets with few parameters and this method would give us insight on certain parts of model selection, like variable selection/parameter elimination.
+							</p>
+						<div class="row">
+							<article class="col-6 col-12-xsmall work-item">
+								<a class="image fit thumb"><img src="images/stills/lasso.png" alt="" /></a>
+								<h3>Visualization of lasso method</h3>
+								<p>Source: Towards Data Science.</p>
+							</article>
+						</div>
 
-						</p>
+						
+						<!--
 						<ul class="actions">
 							<li><a href="#" class="button">Full Portfolio</a></li>
 						</ul>
+					-->
 					</section>
 
 					<!-- 33333 -->
 					<section id="two">
-						<h2>Results and Discussion</h2>
-						<div class="row">
+						<h2>Found That Smoke Shops Are Operated Mainly in Low-Income Regions</h2>
+						<p>
+							After analyzing the data, a positive correlation between socioeconomic status and density of smoke shops arose. As seen in the heatmaps below, smoking retailers operate primarily in areas inhabited by people of lower median income. 
+								</p>
+
+								<div class="row">
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+								<a href="images/stills/hdls.png" class="image fit thumb"><img src="images/fulls/income.png" alt="" /></a>
+								<p>Median household income is mainly concentrated in the central areas and increases on the margins of the county.</p>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+								<a href="images/stills/hdls.png" class="image fit thumb"><img src="images/fulls/smoke.png" alt="" /></a>
+								<p>Smoking retailers have primarily set up shop in the heart and downtown regions of Houston. </p>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+								<a href="images/stills/hdls.png" class="image fit thumb"><img src="images/fulls/trendline.png" alt="" /></a>
+								<p>While spread is high, a clear negative correlation shows.</p>
 							</article>
 						</div>
-						<p>
-							DESCRIBE THE PLOTS
 
-						</p>
-						<ul class="actions">
-							<li><a href="#" class="button">Full Portfolio</a></li>
-						</ul>
+
+								<p>
+									Furthermore, while there was some correlation between population density and smoke shops, further analysis using lasso regression confirmed that smoke shop density is significant to median household income. As shown below, numerous example cases emerged where high population density in richer socioeconomic regions had next to no available smoking products, whereas in poorer regions with comparable or far fewer residents had almost overlapping shops.
+								</p>
+
+					
+						<div class="row">
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/stills/hdls.png" class="image fit thumb"><img src="images/stills/hdls.png" alt="" /></a>
+								<h3>High Population Density</h3>
+								<p>This high population density commerce region has median income of XXX. Patrons who frequent this region are of a higher socioeconomic bracket.</p>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/stills/hdls2.png" class="image fit thumb"><img src="images/stills/hdls2.png" alt="" /></a>
+								<h3>Low Smoke Shop Density</h3>
+								<p>However, there are only six shops selling smoking products - each of which requiring long drives to access with relation to the residential areas.</p>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/stills/ldhs.jpg" class="image fit thumb"><img src="images/stills/ldhs.png" alt="" /></a>
+								<h3>Low Population Density</h3>
+								<p>This commerce region has lower population density than the first case, and differs only in median household income, which is XXX - XXX% lower than the above case.</p>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="images/stills/ldhs2.jpg" class="image fit thumb"><img src="images/stills/ldhs2.png" alt="" /></a>
+								<h3>High Smoke Shop Density</h3>
+								<p>However, there is a far higher frequency of shops with available smoking products in this area, with some nearly overlapping in location.</p>
+							</article>
+						</div>
+						
 					</section>
 
 
 				<!-- conclusino -->
 					<section id="one">
 						<header class="major">
-							<h2>Proposal</h2>
+							<h2>Proposal: Incentives Rather Than Punishments May Help Reduce Smoking Rate</h2>
 						</header>
 						<p>
-							WE PROPOSE
+							After reviewing the results of our data analysis, we've found evidence that supports a correlation between median income and density of smoke shops in regions in Houston. According to the American Lung Association, one of the primary methods of combatting tobacco usage has been to implement and increase taxes on tobacco sales. In addition, many states have tried implementing an age restriction for purchasing tobacco and tobacco accessories. 
 						</p>
 						<p>
-							A GIANT PAIR OF
-
+							Since our results suggest that low median income and harsh socioeconomic situations can make a region more susceptible to tobacco consumption and marketing, we propose that harsher tax and economic penalties will not improve, but exascerbate these specific areas. According to the World Health Organization, tobacco is affected by demand elasticity meaning that when prices increase, consumption decreases by a lesser percentage compared to the price increase. The brunt of these taxes won't be felt by the tobacco vendors, but would instead impact consumers and drive them deeper into economic hardship. 
 						</p>
 						<p>
-							ANIME TITIES
+							We instead support the approach developed by the American Cancer Society, named the Freshstart program, which attempts to tackle the issue using positive reinforcement rather than through legal punishment. Freshstart provides patients with personal coaching and sessions to guide users towards cesession. We propose that in addition to proliferating this program, that users be offered economic incentives such as tax breaks for succeeding in metrics determined by this program (for example, increased lung health, frequent attendance, etc.). A similar program could be implemented for companies that exclude tobacco products from their stores. Tobacco-only companies would experience a higher tax for opening in low-income areas, so as to decrease predatory marketing.
 						</p>
 						<article class="work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-								<h3>Smokers and Socioeconomic class</h3>
-								<p>Blue = below poverty line, red = above poverty line, grey = more than double poverty line</p>
+								<a ><img src="images/thumbs/01.jpg" alt="" /></a>
 							</article>
-						<ul class="actions">
-							<li><a href="#" class="button">Learn More</a></li>
-						</ul>
 					</section>
 
 				<!-- 
